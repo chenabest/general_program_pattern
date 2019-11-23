@@ -1,0 +1,66 @@
+"""
+导入所有依赖包，模块
+"""
+import time
+
+class Robot:
+  """
+  主功能类
+  """
+    def run():
+        ”“”
+        启动robot的主方法，robot的入口
+        “”“
+        pass
+
+   
+def main():
+    ”“”
+    robot的控制器，当robot运行异常中断时，捕获异常，通知相关开发人员，并初始化所有配置后，重启robot.
+    “”“
+    t = Thread(target=update_redis, daemon=True)
+    t.start()
+    while True:
+        try:
+            kill_server(serial, "posts_forward_to_rental_group")
+            time.sleep(2)
+            start_server(serial, port)
+            time.sleep(10)
+        except Exception as e:
+            print(e)
+            print_exc()
+            messenger.send_message(['主人，posts_forward_to_rental_group_assistant脚本运行出现异常:', str(e), '赶紧去处理哦.'])
+            continue
+        try:
+            robot = Robot()
+            time.sleep(15)
+            robot.run()
+        except NoSuchElementException as e:
+            print(e)
+            print_exc()
+            messenger.send_message(['主人，脚本运行出现异常:', str(e), '赶紧去处理哦.'])
+        except InvalidSessionIdException:
+            print(e)
+            print_exc()
+            messenger.send_message(['主人，脚本运行出现异常:', str(e), '赶紧去处理哦.'])
+        except TimeoutException:
+            print(e)
+            print_exc()
+            messenger.send_message(['主人，脚本运行出现异常:', str(e), '赶紧去处理哦.'])
+        except Exception as e:
+            print("发生未知的错误")
+            print(e)
+            print_exc()
+            messenger.send_message(['主人，posts_forward_to_rental_group脚本运行出现异常:', str(e), '赶紧去处理哦.'])
+
+
+if __name__ == '__main__':
+    """
+    初始化一些参数和一些其他必要的对象，动态导入模块等。
+    """
+    opts, args = getopt.getopt(sys.argv[1:], 'x', ['port='])
+    port = dict(opts).get('port')
+    MyDriver = __import__('appium_robot.robot.tools.my_driver_and_element', fromlist=['MyDriver']).MyDriver
+    messenger = SendMessage()
+    messenger.send_message(['robot：主人，您的脚本开始运行，如果出现问题，我会及时报告的哦~', 'Ready go...'], '萤火虫')
+    main()
