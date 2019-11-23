@@ -9,7 +9,7 @@ class Robot:
   """
     def run():
         ”“”
-        启动robot的主方法，robot的入口
+        主方法，robot的入口
         “”“
         pass
 
