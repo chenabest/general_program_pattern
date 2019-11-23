@@ -22,14 +22,14 @@ def main():
     t.start()
     while True:
         try:
-            kill_server(serial, "posts_forward_to_rental_group")
+            kill_server(serial, "脚本名称.py")
             time.sleep(2)
             start_server(serial, port)
             time.sleep(10)
         except Exception as e:
             print(e)
             print_exc()
-            messenger.send_message(['主人，posts_forward_to_rental_group_assistant脚本运行出现异常:', str(e), '赶紧去处理哦.'])
+            messenger.send_message(['主人，脚本运行出现异常:', str(e), '赶紧去处理哦.'])
             continue
         try:
             robot = Robot()
