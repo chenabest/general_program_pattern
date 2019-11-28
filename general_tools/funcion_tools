@@ -1,0 +1,15 @@
+import pendulum
+
+
+def get_timestamp_of_next_work_start_time(hour_start: int, minute_start=0, second_start=0):
+    now = pendulum.now()
+    hour_now = int(now.format('HH'))
+    minute_now = int(now.format('mm'))
+    second_now = int(now.format('ss'))
+    if hour_now >= hour_start and minute_now >= minute_start and second_now >= second_start:
+        timestamp = pendulum.now().add(days=1).replace(
+            hour=hour_start, minute=minute_start, second=second_start).timestamp()
+    else:
+        timestamp = pendulum.now().replace(
+            hour=hour_start, minute=minute_start, second=second_start).timestamp()
+    return timestamp
